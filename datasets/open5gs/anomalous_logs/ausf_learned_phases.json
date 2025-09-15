@@ -1,0 +1,61 @@
+{
+  "nf": "ausf",
+  "phases": [
+    {
+      "name": "nausf",
+      "pattern": "\\\\bnausf\\\\b",
+      "tokens": [
+        "nausf",
+        "nausf-auth"
+      ],
+      "weight": 0.01,
+      "evidence": 3
+    },
+    {
+      "name": "nausf nausf-auth",
+      "pattern": "\\\\bnausf\\\\s+nausf\\-auth\\\\b",
+      "tokens": [
+        "nausf",
+        "nausf-auth"
+      ],
+      "weight": 0.01,
+      "evidence": 3
+    },
+    {
+      "name": "http",
+      "pattern": "\\\\bhttp\\\\b",
+      "tokens": [
+        "http"
+      ],
+      "weight": 0.01,
+      "evidence": 3
+    },
+    {
+      "name": "registration",
+      "pattern": "\\\\bregistration\\\\b",
+      "tokens": [
+        "registration"
+      ],
+      "weight": 0.004,
+      "evidence": 2
+    },
+    {
+      "name": "nnrf-handler",
+      "pattern": "\\\\bnnrf\\-handler\\\\b",
+      "tokens": [
+        "nnrf-handler"
+      ],
+      "weight": 0.058,
+      "evidence": 18
+    },
+    {
+      "name": "nudm-handler",
+      "pattern": "\\\\bnudm\\-handler\\\\b",
+      "tokens": [
+        "nudm-handler"
+      ],
+      "weight": 0.01,
+      "evidence": 3
+    }
+  ]
+}

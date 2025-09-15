@@ -1,0 +1,2 @@
+time=2025-07-10T03:48:54.279Z level=INFO source=tls_config.go:347 msg="Listening on" address=[::]:9090
+time=2025-07-10T03:48:54.279Z level=INFO source=tls_config.go:350 msg="TLS is disabled." http2=false address=[::]:9090

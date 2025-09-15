@@ -1,0 +1,121 @@
+{
+  "nf": "smf",
+  "phases": [
+    {
+      "name": "pfcp",
+      "pattern": "\\\\bpfcp\\\\b",
+      "tokens": [
+        "pfcp"
+      ],
+      "weight": 0.003,
+      "evidence": 27
+    },
+    {
+      "name": "session",
+      "pattern": "\\\\bsession\\\\b",
+      "tokens": [
+        "session"
+      ],
+      "weight": 0.001,
+      "evidence": 15
+    },
+    {
+      "name": "http",
+      "pattern": "\\\\bhttp\\\\b",
+      "tokens": [
+        "http",
+        "response",
+        "status"
+      ],
+      "weight": 0.001,
+      "evidence": 7
+    },
+    {
+      "name": "nsmf",
+      "pattern": "\\\\bnsmf\\\\b",
+      "tokens": [
+        "nsmf",
+        "nsmf-pdusession"
+      ],
+      "weight": 0.0,
+      "evidence": 3
+    },
+    {
+      "name": "nsmf nsmf-pdusession",
+      "pattern": "\\\\bnsmf\\\\s+nsmf\\-pdusession\\\\b",
+      "tokens": [
+        "nsmf",
+        "nsmf-pdusession"
+      ],
+      "weight": 0.0,
+      "evidence": 3
+    },
+    {
+      "name": "PFCP pfcp",
+      "pattern": "\\\\bPFCP\\\\s+pfcp\\\\b",
+      "tokens": [
+        "pfcp"
+      ],
+      "weight": 0.002,
+      "evidence": 15
+    },
+    {
+      "name": "registration",
+      "pattern": "\\\\bregistration\\\\b",
+      "tokens": [
+        "registration"
+      ],
+      "weight": 0.001,
+      "evidence": 4
+    },
+    {
+      "name": "nnrf-handler",
+      "pattern": "\\\\bnnrf\\-handler\\\\b",
+      "tokens": [
+        "nnrf-handler"
+      ],
+      "weight": 0.008,
+      "evidence": 72
+    },
+    {
+      "name": "nsmf-handler",
+      "pattern": "\\\\bnsmf\\-handler\\\\b",
+      "tokens": [
+        "nsmf-handler"
+      ],
+      "weight": 0.0,
+      "evidence": 3
+    },
+    {
+      "name": "npcf-handler",
+      "pattern": "\\\\bnpcf\\-handler\\\\b",
+      "tokens": [
+        "npcf-handler"
+      ],
+      "weight": 0.001,
+      "evidence": 6
+    },
+    {
+      "name": "HTTP Response",
+      "pattern": "\\\\bHTTP\\\\s+Response\\\\b",
+      "tokens": [
+        "http",
+        "response",
+        "status"
+      ],
+      "weight": 1.0,
+      "evidence": 1
+    },
+    {
+      "name": "HTTP Response Status",
+      "pattern": "\\\\bHTTP\\\\s+Response\\\\s+Status\\\\b",
+      "tokens": [
+        "http",
+        "response",
+        "status"
+      ],
+      "weight": 1.0,
+      "evidence": 1
+    }
+  ]
+}

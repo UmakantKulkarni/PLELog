@@ -1,0 +1,23 @@
+{
+  "nf": "nrf",
+  "phases": [
+    {
+      "name": "http",
+      "pattern": "\\\\bhttp\\\\b",
+      "tokens": [
+        "http"
+      ],
+      "weight": 0.0,
+      "evidence": 3
+    },
+    {
+      "name": "nnrf-handler",
+      "pattern": "\\\\bnnrf\\-handler\\\\b",
+      "tokens": [
+        "nnrf-handler"
+      ],
+      "weight": 0.023,
+      "evidence": 216
+    }
+  ]
+}

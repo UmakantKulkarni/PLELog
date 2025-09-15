@@ -1,0 +1,32 @@
+{
+  "nf": "scp",
+  "phases": [
+    {
+      "name": "http",
+      "pattern": "\\\\bhttp\\\\b",
+      "tokens": [
+        "http"
+      ],
+      "weight": 0.0,
+      "evidence": 3
+    },
+    {
+      "name": "registration",
+      "pattern": "\\\\bregistration\\\\b",
+      "tokens": [
+        "registration"
+      ],
+      "weight": 0.0,
+      "evidence": 4
+    },
+    {
+      "name": "nnrf-handler",
+      "pattern": "\\\\bnnrf\\-handler\\\\b",
+      "tokens": [
+        "nnrf-handler"
+      ],
+      "weight": 0.009,
+      "evidence": 113
+    }
+  ]
+}

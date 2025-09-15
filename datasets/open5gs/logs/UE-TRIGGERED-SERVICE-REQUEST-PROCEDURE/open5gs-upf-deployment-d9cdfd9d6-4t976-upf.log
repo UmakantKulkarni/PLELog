@@ -1,0 +1,45 @@
+net.ipv6.conf.all.disable_ipv6 = 1
+Open5GS daemon v2.7.2
+
+[32m07/10 02:04:53.403[0m: [[33mapp[0m] [1;32mINFO[0m: Configuration: '/open5gs/config-map/upf.yaml' (../lib/app/ogs-init.c:133)
+[32m07/10 02:04:53.403[0m: [[33mapp[0m] [1;32mINFO[0m: File Logging: '/var/log/open5gs/upf.log' (../lib/app/ogs-init.c:136)
+[32m07/10 02:04:53.486[0m: [[33mpfcp[0m] [1;36mWARNING[0m: Please change the configuration files of smf.yaml and upf.yaml as below. (../lib/pfcp/context.c:2194)
+
+<OLD Format>
+smf:
+  session:
+    - subnet: 10.45.0.1/16
+
+<NEW Format>
+smf:
+  session:
+    - subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
+
+
+[32m07/10 02:04:53.486[0m: [[33mpfcp[0m] [1;36mWARNING[0m: Please change the configuration files of smf.yaml and upf.yaml as below. (../lib/pfcp/context.c:2194)
+
+<OLD Format>
+smf:
+  session:
+    - subnet: 2001:db8:cafe::1/48
+
+<NEW Format>
+smf:
+  session:
+    - subnet: 2001:db8:cafe::/48
+      gateway: 2001:db8:cafe::1
+
+
+[32m07/10 02:04:53.487[0m: [[33mmetrics[0m] [1;32mINFO[0m: metrics_server() [http://0.0.0.0]:9090 (../lib/metrics/prometheus/context.c:299)
+[32m07/10 02:04:53.487[0m: [[33mpfcp[0m] [1;32mINFO[0m: pfcp_server() [10.244.1.50]:8805 (../lib/pfcp/path.c:30)
+[32m07/10 02:04:53.487[0m: [[33mgtp[0m] [1;32mINFO[0m: gtp_server() [10.244.1.50]:2152 (../lib/gtp/path.c:30)
+[32m07/10 02:04:53.487[0m: [[33mapp[0m] [1;32mINFO[0m: UPF initialize...done (../src/upf/app.c:31)
+[32m07/10 02:05:25.546[0m: [[33mpfcp[0m] [1;32mINFO[0m: ogs_pfcp_connect() [10.244.2.40]:8805 (../lib/pfcp/path.c:61)
+[32m07/10 02:05:25.547[0m: [[33mupf[0m] [1;32mINFO[0m: PFCP associated [10.244.2.40]:8805 (../src/upf/pfcp-sm.c:184)
+[32m07/10 02:07:41.464[0m: [[33mupf[0m] [1;32mINFO[0m: [Added] Number of UPF-Sessions is now 1 (../src/upf/context.c:207)
+[32m07/10 02:07:41.464[0m: [[33mgtp[0m] [1;32mINFO[0m: gtp_connect() [10.244.2.40]:2152 (../lib/gtp/path.c:60)
+[32m07/10 02:07:41.464[0m: [[33mupf[0m] [1;32mINFO[0m: UE F-SEID[UP:0x16a4 CP:0xa37] APN[internet] PDN-Type[1] IPv4[10.45.0.2] IPv6[] (../src/upf/context.c:493)
+[32m07/10 02:07:41.464[0m: [[33mupf[0m] [1;32mINFO[0m: UE F-SEID[UP:0x16a4 CP:0xa37] APN[internet] PDN-Type[1] IPv4[10.45.0.2] IPv6[] (../src/upf/context.c:493)
+[32m07/10 02:07:41.971[0m: [[33mgtp[0m] [1;32mINFO[0m: gtp_connect() [10.244.3.47]:2152 (../lib/gtp/path.c:60)
+[32m07/10 02:07:45.276[0m: [[33mupf[0m] [1;32mINFO[0m: [Removed] Number of UPF-sessions is now 0 (../src/upf/context.c:251)

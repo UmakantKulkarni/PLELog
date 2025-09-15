@@ -1,0 +1,17 @@
+Open5GS daemon v2.7.2
+
+[32m07/10 01:48:45.473[0m: [[33mapp[0m] [1;32mINFO[0m: Configuration: '/open5gs/config-map/bsf.yaml' (../lib/app/ogs-init.c:133)
+[32m07/10 01:48:45.473[0m: [[33mapp[0m] [1;32mINFO[0m: File Logging: '/var/log/open5gs/bsf.log' (../lib/app/ogs-init.c:136)
+[32m07/10 01:48:45.477[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-scp:80] (../lib/sbi/context.c:474)
+[32m07/10 01:48:45.477[0m: [[33mbsf[0m] [1;36mWARNING[0m: unknown key `metrics` (../src/bsf/context.c:115)
+[32m07/10 01:48:45.477[0m: [[33msbi[0m] [1;32mINFO[0m: NF Service [nbsf-management] (../lib/sbi/context.c:1829)
+[32m07/10 01:48:45.478[0m: [[33msbi[0m] [1;32mINFO[0m: nghttp2_server() [http://0.0.0.0]:80 (../lib/sbi/nghttp2-server.c:424)
+[32m07/10 01:48:45.478[0m: [[33mapp[0m] [1;32mINFO[0m: BSF initialize...done (../src/bsf/app.c:31)
+[32m07/10 01:48:56.489[0m: [[33msbi[0m] [1;33mERROR[0m: Connection timer expired (../lib/sbi/client.c:605)
+[32m07/10 01:48:56.489[0m: [[33msbi[0m] [1;36mWARNING[0m: ogs_sbi_client_handler() failed [-3] (../lib/sbi/path.c:62)
+[32m07/10 01:48:56.489[0m: [[33msbi[0m] [1;36mWARNING[0m: [8b07d614-5d51-41f0-89ee-87a2e8bfcabc] Retry registration with NRF (../lib/sbi/nf-sm.c:169)
+[32m07/10 01:48:56.490[0m: [[33msbi[0m] [1;33mERROR[0m: [8b07d614-5d51-41f0-89ee-87a2e8bfcabc] HTTP Response Status Code [500] (../lib/sbi/nf-sm.c:145)
+[32m07/10 01:48:58.492[0m: [[33msbi[0m] [1;36mWARNING[0m: [8b07d614-5d51-41f0-89ee-87a2e8bfcabc] Retry registration with NRF (../lib/sbi/nf-sm.c:395)
+[32m07/10 01:49:01.535[0m: [[33msbi[0m] [1;32mINFO[0m: [8b07d614-5d51-41f0-89ee-87a2e8bfcabc] NF registered [Heartbeat:10s] (../lib/sbi/nf-sm.c:208)
+[32m07/10 01:49:01.536[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-nrf:0] (../lib/sbi/nnrf-handler.c:949)
+[32m07/10 01:49:01.536[0m: [[33msbi[0m] [1;32mINFO[0m: [949a498c-5d51-41f0-897b-53f8cf9c8455] Subscription created until 2025-07-11T01:49:01.535976-04:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:868)

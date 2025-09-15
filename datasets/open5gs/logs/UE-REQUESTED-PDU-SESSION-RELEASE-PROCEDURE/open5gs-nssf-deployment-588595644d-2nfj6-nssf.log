@@ -1,0 +1,15 @@
+Open5GS daemon v2.7.2
+
+[32m07/10 01:57:55.501[0m: [[33mapp[0m] [1;32mINFO[0m: Configuration: '/open5gs/config-map/nssf.yaml' (../lib/app/ogs-init.c:133)
+[32m07/10 01:57:55.501[0m: [[33mapp[0m] [1;32mINFO[0m: File Logging: '/var/log/open5gs/nssf.log' (../lib/app/ogs-init.c:136)
+[32m07/10 01:57:55.504[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-scp:80] (../lib/sbi/context.c:474)
+[32m07/10 01:57:55.504[0m: [[33mnssf[0m] [1;36mWARNING[0m: unknown key `metrics` (../src/nssf/context.c:266)
+[32m07/10 01:57:55.504[0m: [[33msbi[0m] [1;32mINFO[0m: NF Service [nnssf-nsselection] (../lib/sbi/context.c:1829)
+[32m07/10 01:57:55.505[0m: [[33msbi[0m] [1;32mINFO[0m: nghttp2_server() [http://0.0.0.0]:80 (../lib/sbi/nghttp2-server.c:424)
+[32m07/10 01:57:55.505[0m: [[33mapp[0m] [1;32mINFO[0m: NSSF initialize...done (../src/nssf/app.c:31)
+[32m07/10 01:58:06.513[0m: [[33msbi[0m] [1;33mERROR[0m: Connection timer expired (../lib/sbi/client.c:605)
+[32m07/10 01:58:06.513[0m: [[33msbi[0m] [1;36mWARNING[0m: ogs_sbi_client_handler() failed [-3] (../lib/sbi/path.c:62)
+[32m07/10 01:58:06.513[0m: [[33msbi[0m] [1;36mWARNING[0m: [d2df5b00-5d52-41f0-92ae-b1ece5fa4ec2] Retry registration with NRF (../lib/sbi/nf-sm.c:169)
+[32m07/10 01:58:06.514[0m: [[33msbi[0m] [1;32mINFO[0m: [d2df5b00-5d52-41f0-92ae-b1ece5fa4ec2] NF registered [Heartbeat:10s] (../lib/sbi/nf-sm.c:208)
+[32m07/10 01:58:06.515[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-nrf:0] (../lib/sbi/nnrf-handler.c:949)
+[32m07/10 01:58:06.515[0m: [[33msbi[0m] [1;32mINFO[0m: [d96f85ee-5d52-41f0-97ea-6bf869add9b5] Subscription created until 2025-07-11T01:58:06.515163-04:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:868)

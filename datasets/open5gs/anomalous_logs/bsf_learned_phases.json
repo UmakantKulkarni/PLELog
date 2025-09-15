@@ -1,0 +1,65 @@
+{
+  "nf": "bsf",
+  "phases": [
+    {
+      "name": "nbsf-management",
+      "pattern": "\\\\bnbsf\\-management\\\\b",
+      "tokens": [
+        "nbsf-management"
+      ],
+      "weight": 0.017,
+      "evidence": 3
+    },
+    {
+      "name": "http",
+      "pattern": "\\\\bhttp\\\\b",
+      "tokens": [
+        "http",
+        "response",
+        "status"
+      ],
+      "weight": 0.03,
+      "evidence": 4
+    },
+    {
+      "name": "registration",
+      "pattern": "\\\\bregistration\\\\b",
+      "tokens": [
+        "registration"
+      ],
+      "weight": 0.031,
+      "evidence": 4
+    },
+    {
+      "name": "nnrf-handler",
+      "pattern": "\\\\bnnrf\\-handler\\\\b",
+      "tokens": [
+        "nnrf-handler"
+      ],
+      "weight": 0.035,
+      "evidence": 6
+    },
+    {
+      "name": "HTTP Response",
+      "pattern": "\\\\bHTTP\\\\s+Response\\\\b",
+      "tokens": [
+        "http",
+        "response",
+        "status"
+      ],
+      "weight": 1.0,
+      "evidence": 1
+    },
+    {
+      "name": "HTTP Response Status",
+      "pattern": "\\\\bHTTP\\\\s+Response\\\\s+Status\\\\b",
+      "tokens": [
+        "http",
+        "response",
+        "status"
+      ],
+      "weight": 1.0,
+      "evidence": 1
+    }
+  ]
+}

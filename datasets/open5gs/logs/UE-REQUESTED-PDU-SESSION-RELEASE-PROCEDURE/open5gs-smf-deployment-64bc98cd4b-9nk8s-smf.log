@@ -1,0 +1,121 @@
+Open5GS daemon v2.7.2
+
+[32m07/10 01:57:55.507[0m: [[33mapp[0m] [1;32mINFO[0m: Configuration: '/open5gs/config-map/smf.yaml' (../lib/app/ogs-init.c:133)
+[32m07/10 01:57:55.507[0m: [[33mapp[0m] [1;32mINFO[0m: File Logging: '/var/log/open5gs/smf.log' (../lib/app/ogs-init.c:136)
+[32m07/10 01:57:55.599[0m: [[33mpfcp[0m] [1;36mWARNING[0m: Please change the configuration files of smf.yaml and upf.yaml as below. (../lib/pfcp/context.c:2194)
+
+<OLD Format>
+smf:
+  session:
+    - subnet: 10.45.0.1/16
+
+<NEW Format>
+smf:
+  session:
+    - subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
+
+
+[32m07/10 01:57:55.599[0m: [[33mpfcp[0m] [1;36mWARNING[0m: Please change the configuration files of smf.yaml and upf.yaml as below. (../lib/pfcp/context.c:2194)
+
+<OLD Format>
+smf:
+  session:
+    - subnet: 2001:db8:cafe::1/48
+
+<NEW Format>
+smf:
+  session:
+    - subnet: 2001:db8:cafe::/48
+      gateway: 2001:db8:cafe::1
+
+
+[32m07/10 01:57:55.600[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-scp:80] (../lib/sbi/context.c:474)
+[32m07/10 01:57:55.601[0m: [[33mmetrics[0m] [1;32mINFO[0m: metrics_server() [http://0.0.0.0]:9090 (../lib/metrics/prometheus/context.c:299)
+[32m07/10 01:57:55.601[0m: [[33msmf[0m] [1;36mWARNING[0m: No diameter configuration (../src/smf/fd-path.c:30)
+[32m07/10 01:57:55.601[0m: [[33mgtp[0m] [1;32mINFO[0m: gtp_server() [10.244.1.44]:2123 (../lib/gtp/path.c:30)
+[32m07/10 01:57:55.601[0m: [[33mgtp[0m] [1;32mINFO[0m: gtp_server() [10.244.1.44]:2152 (../lib/gtp/path.c:30)
+[32m07/10 01:57:55.601[0m: [[33mpfcp[0m] [1;32mINFO[0m: pfcp_server() [10.244.1.44]:8805 (../lib/pfcp/path.c:30)
+[32m07/10 01:57:55.601[0m: [[33mpfcp[0m] [1;32mINFO[0m: ogs_pfcp_connect() [10.96.184.90]:8805 (../lib/pfcp/path.c:61)
+[32m07/10 01:57:55.602[0m: [[33msbi[0m] [1;32mINFO[0m: NF Service [nsmf-pdusession] (../lib/sbi/context.c:1829)
+[32m07/10 01:57:55.602[0m: [[33msbi[0m] [1;32mINFO[0m: nghttp2_server() [http://0.0.0.0]:80 (../lib/sbi/nghttp2-server.c:424)
+[32m07/10 01:57:55.602[0m: [[33mapp[0m] [1;32mINFO[0m: SMF initialize...done (../src/smf/app.c:31)
+[32m07/10 01:57:55.603[0m: [[33msmf[0m] [1;32mINFO[0m: PFCP associated [10.96.184.90]:8805 (../src/smf/pfcp-sm.c:203)
+[32m07/10 01:58:06.609[0m: [[33msbi[0m] [1;33mERROR[0m: Connection timer expired (../lib/sbi/client.c:605)
+[32m07/10 01:58:06.609[0m: [[33msbi[0m] [1;36mWARNING[0m: ogs_sbi_client_handler() failed [-3] (../lib/sbi/path.c:62)
+[32m07/10 01:58:06.609[0m: [[33msbi[0m] [1;36mWARNING[0m: [d2ec3fe6-5d52-41f0-a7cb-dd063abd57bd] Retry registration with NRF (../lib/sbi/nf-sm.c:169)
+[32m07/10 01:58:06.611[0m: [[33msbi[0m] [1;32mINFO[0m: [d2ec3fe6-5d52-41f0-a7cb-dd063abd57bd] NF registered [Heartbeat:10s] (../lib/sbi/nf-sm.c:208)
+[32m07/10 01:58:06.612[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-nrf:0] (../lib/sbi/nnrf-handler.c:949)
+[32m07/10 01:58:06.613[0m: [[33msbi[0m] [1;32mINFO[0m: [d97e5862-5d52-41f0-97ea-6bf869add9b5] Subscription created until 2025-07-11T01:58:06.612326-04:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:868)
+[32m07/10 01:58:06.613[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-nrf:0] (../lib/sbi/nnrf-handler.c:949)
+[32m07/10 01:58:06.613[0m: [[33msbi[0m] [1;32mINFO[0m: [d97e5fc4-5d52-41f0-97ea-6bf869add9b5] Subscription created until 2025-07-11T01:58:06.612488-04:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:868)
+[32m07/10 01:58:06.613[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-nrf:0] (../lib/sbi/nnrf-handler.c:949)
+[32m07/10 01:58:06.613[0m: [[33msbi[0m] [1;32mINFO[0m: [d97e66b8-5d52-41f0-97ea-6bf869add9b5] Subscription created until 2025-07-11T01:58:06.612666-04:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:868)
+[32m07/10 01:58:06.613[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-nrf:0] (../lib/sbi/nnrf-handler.c:949)
+[32m07/10 01:58:06.613[0m: [[33msbi[0m] [1;32mINFO[0m: [d97e6d16-5d52-41f0-97ea-6bf869add9b5] Subscription created until 2025-07-11T01:58:06.612828-04:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:868)
+[32m07/10 01:58:06.613[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-nrf:0] (../lib/sbi/nnrf-handler.c:949)
+[32m07/10 01:58:06.613[0m: [[33msbi[0m] [1;32mINFO[0m: [d97e6eec-5d52-41f0-97ea-6bf869add9b5] Subscription created until 2025-07-11T01:58:06.612876-04:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:868)
+[32m07/10 01:58:07.038[0m: [[33msbi[0m] [1;32mINFO[0m: [d32dfbb6-5d52-41f0-970d-a7c37351747b] (NRF-notify) NF registered (../lib/sbi/nnrf-handler.c:1133)
+[32m07/10 01:58:07.038[0m: [[33msbi[0m] [1;32mINFO[0m: [d32dfbb6-5d52-41f0-970d-a7c37351747b] (NRF-notify) NF Profile updated [type:PCF] (../lib/sbi/nnrf-handler.c:1147)
+[32m07/10 01:58:07.038[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-pcf:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.038[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-pcf:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.039[0m: [[33msbi[0m] [1;36mWARNING[0m: [d32dfbb6-5d52-41f0-970d-a7c37351747b] (NRF-notify) NF has already been added [type:PCF] (../lib/sbi/nnrf-handler.c:1135)
+[32m07/10 01:58:07.039[0m: [[33msbi[0m] [1;32mINFO[0m: [d32dfbb6-5d52-41f0-970d-a7c37351747b] (NRF-notify) NF Profile updated [type:PCF] (../lib/sbi/nnrf-handler.c:1147)
+[32m07/10 01:58:07.039[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-pcf:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.039[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-pcf:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.039[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-pcf:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.039[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-pcf:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.124[0m: [[33msbi[0m] [1;32mINFO[0m: [d33bd0ba-5d52-41f0-a670-45adbc08df8a] (NRF-notify) NF registered (../lib/sbi/nnrf-handler.c:1133)
+[32m07/10 01:58:07.124[0m: [[33msbi[0m] [1;32mINFO[0m: [d33bd0ba-5d52-41f0-a670-45adbc08df8a] (NRF-notify) NF Profile updated [type:AMF] (../lib/sbi/nnrf-handler.c:1147)
+[32m07/10 01:58:07.124[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-amf:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.124[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-amf:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.124[0m: [[33msbi[0m] [1;36mWARNING[0m: [d33bd0ba-5d52-41f0-a670-45adbc08df8a] (NRF-notify) NF has already been added [type:AMF] (../lib/sbi/nnrf-handler.c:1135)
+[32m07/10 01:58:07.124[0m: [[33msbi[0m] [1;32mINFO[0m: [d33bd0ba-5d52-41f0-a670-45adbc08df8a] (NRF-notify) NF Profile updated [type:AMF] (../lib/sbi/nnrf-handler.c:1147)
+[32m07/10 01:58:07.124[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-amf:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.124[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-amf:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.124[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-amf:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.124[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-amf:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: [d33cb8f4-5d52-41f0-a6f9-01de33d714e5] (NRF-notify) NF registered (../lib/sbi/nnrf-handler.c:1133)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: [d33cb8f4-5d52-41f0-a6f9-01de33d714e5] (NRF-notify) NF Profile updated [type:UDM] (../lib/sbi/nnrf-handler.c:1147)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: [d33cb8f4-5d52-41f0-a6f9-01de33d714e5] (NRF-notify) NF has already been added [type:UDM] (../lib/sbi/nnrf-handler.c:1135)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: [d33cb8f4-5d52-41f0-a6f9-01de33d714e5] (NRF-notify) NF Profile updated [type:UDM] (../lib/sbi/nnrf-handler.c:1147)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-udm:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: [d33cb8f4-5d52-41f0-a6f9-01de33d714e5] (NRF-notify) NF has already been added [type:UDM] (../lib/sbi/nnrf-handler.c:1135)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: [d33cb8f4-5d52-41f0-a6f9-01de33d714e5] (NRF-notify) NF Profile updated [type:UDM] (../lib/sbi/nnrf-handler.c:1147)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-udm:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: [d33cb8f4-5d52-41f0-a6f9-01de33d714e5] (NRF-notify) NF has already been added [type:UDM] (../lib/sbi/nnrf-handler.c:1135)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: [d33cb8f4-5d52-41f0-a6f9-01de33d714e5] (NRF-notify) NF Profile updated [type:UDM] (../lib/sbi/nnrf-handler.c:1147)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-udm:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:2195)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;36mWARNING[0m: NF EndPoint(fqdn) updated [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:07.127[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-udm:0] (../lib/sbi/context.c:1934)
+[32m07/10 01:58:28.616[0m: [[33mpfcp[0m] [1;33mERROR[0m: Remote PFCP restarted [3961115325<3961115876] in Heartbeat RSP (../lib/pfcp/handler.c:76)
+[32m07/10 01:58:28.616[0m: [[33msmf[0m] [1;32mINFO[0m: PFCP de-associated [10.96.184.90]:8805 (../src/smf/pfcp-sm.c:218)
+[32m07/10 01:58:28.617[0m: [[33msmf[0m] [1;32mINFO[0m: PFCP associated [10.96.184.90]:8805 (../src/smf/pfcp-sm.c:203)
+[32m07/10 01:58:28.617[0m: [[33msmf[0m] [1;33mERROR[0m: PFCP restoration (../src/smf/pfcp-sm.c:214)
+[32m07/10 02:00:50.320[0m: [[33msmf[0m] [1;32mINFO[0m: [Added] Number of SMF-UEs is now 1 (../src/smf/context.c:1029)
+[32m07/10 02:00:50.320[0m: [[33msmf[0m] [1;32mINFO[0m: [Added] Number of SMF-Sessions is now 1 (../src/smf/context.c:3113)
+[32m07/10 02:00:50.320[0m: [[33msmf[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-amf:0] (../src/smf/nsmf-handler.c:269)
+[32m07/10 02:00:50.320[0m: [[33msbi[0m] [1;32mINFO[0m: [d33cb8f4-5d52-41f0-a6f9-01de33d714e5] NF Instance setup [type:UDM validity:0s] (../lib/sbi/path.c:297)
+[32m07/10 02:00:50.324[0m: [[33msbi[0m] [1;32mINFO[0m: [d32dfbb6-5d52-41f0-970d-a7c37351747b] NF Instance setup [type:PCF validity:0s] (../lib/sbi/path.c:297)
+[32m07/10 02:00:50.330[0m: [[33msmf[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-pcf:0] (../src/smf/npcf-handler.c:367)
+[32m07/10 02:00:50.330[0m: [[33msmf[0m] [1;32mINFO[0m: UE SUPI[imsi-208930000000002] DNN[internet] IPv4[10.45.0.2] IPv6[] (../src/smf/npcf-handler.c:578)
+[32m07/10 02:00:50.330[0m: [[33mgtp[0m] [1;32mINFO[0m: gtp_connect() [10.244.2.38]:2152 (../lib/gtp/path.c:60)
+[32m07/10 02:00:50.331[0m: [[33msbi[0m] [1;32mINFO[0m: [d33bd0ba-5d52-41f0-a670-45adbc08df8a] NF Instance setup [type:AMF validity:0s] (../lib/sbi/path.c:297)
+[32m07/10 02:00:50.837[0m: [[33msbi[0m] [1;32mINFO[0m: [d33cb8f4-5d52-41f0-a6f9-01de33d714e5] NF Instance setup [type:UDM validity:0s] (../lib/sbi/path.c:297)
+[32m07/10 02:00:54.143[0m: [[33msmf[0m] [1;32mINFO[0m: Removed Session: UE IMSI:[imsi-208930000000002] DNN:[internet:10] IPv4:[10.45.0.2] IPv6:[] (../src/smf/context.c:1689)
+[32m07/10 02:00:54.143[0m: [[33msmf[0m] [1;32mINFO[0m: [Removed] Number of SMF-Sessions is now 0 (../src/smf/context.c:3121)
+[32m07/10 02:00:54.143[0m: [[33msmf[0m] [1;32mINFO[0m: [Removed] Number of SMF-UEs is now 0 (../src/smf/context.c:1090)

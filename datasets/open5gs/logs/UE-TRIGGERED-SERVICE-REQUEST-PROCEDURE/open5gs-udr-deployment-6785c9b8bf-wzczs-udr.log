@@ -1,0 +1,18 @@
+1
+MongoDB is ready!
+Open5GS daemon v2.7.2
+
+[32m07/10 02:04:53.340[0m: [[33mapp[0m] [1;32mINFO[0m: Configuration: '/open5gs/config-map/udr.yaml' (../lib/app/ogs-init.c:133)
+[32m07/10 02:04:53.340[0m: [[33mapp[0m] [1;32mINFO[0m: File Logging: '/var/log/open5gs/udr.log' (../lib/app/ogs-init.c:136)
+[32m07/10 02:04:53.343[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-scp:80] (../lib/sbi/context.c:474)
+[32m07/10 02:04:53.343[0m: [[33mudr[0m] [1;36mWARNING[0m: unknown key `metrics` (../src/udr/context.c:98)
+[32m07/10 02:04:53.345[0m: [[33mdbi[0m] [1;32mINFO[0m: MongoDB URI: 'mongodb://mongodb-svc/open5gs' (../lib/dbi/ogs-mongoc.c:130)
+[32m07/10 02:04:53.345[0m: [[33msbi[0m] [1;32mINFO[0m: NF Service [nudr-dr] (../lib/sbi/context.c:1829)
+[32m07/10 02:04:53.346[0m: [[33msbi[0m] [1;32mINFO[0m: nghttp2_server() [http://0.0.0.0]:80 (../lib/sbi/nghttp2-server.c:424)
+[32m07/10 02:04:53.346[0m: [[33mapp[0m] [1;32mINFO[0m: UDR initialize...done (../src/udr/app.c:31)
+[32m07/10 02:04:53.346[0m: [[33msbi[0m] [1;36mWARNING[0m: [7] Failed to connect to open5gs-scp port 80 after 0 ms: Connection refused (../lib/sbi/client.c:698)
+[32m07/10 02:04:53.346[0m: [[33msbi[0m] [1;36mWARNING[0m: ogs_sbi_client_handler() failed [-1] (../lib/sbi/path.c:62)
+[32m07/10 02:05:04.357[0m: [[33msbi[0m] [1;36mWARNING[0m: [cbec8d80-5d53-41f0-897d-a92ca6331687] Retry registration with NRF (../lib/sbi/nf-sm.c:169)
+[32m07/10 02:05:04.360[0m: [[33msbi[0m] [1;32mINFO[0m: [cbec8d80-5d53-41f0-897d-a92ca6331687] NF registered [Heartbeat:10s] (../lib/sbi/nf-sm.c:208)
+[32m07/10 02:05:04.360[0m: [[33msbi[0m] [1;32mINFO[0m: NF EndPoint(fqdn) setup [open5gs-nrf:0] (../lib/sbi/nnrf-handler.c:949)
+[32m07/10 02:05:04.361[0m: [[33msbi[0m] [1;32mINFO[0m: [d27daea4-5d53-41f0-bb38-49c5b981c6ea] Subscription created until 2025-07-11T02:05:04.360644-04:00 [duration:86400000000,validity:86400.000000,patch:43200.000000] (../lib/sbi/nnrf-handler.c:868)
