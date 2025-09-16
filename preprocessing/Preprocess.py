@@ -2,6 +2,7 @@ from CONSTANTS import *
 from entities.instances import Instance
 from preprocessing.dataloader.BGLLoader import BGLLoader
 from preprocessing.dataloader.HDFSLoader import HDFSLoader
+from preprocessing.Open5GSLoader import Open5GSLoader
 
 
 class Preprocessor:
@@ -70,6 +71,10 @@ class Preprocessor:
             dataloader = BGLLoader(in_file=in_file, dataset_base=dataset_base,
                                    semantic_repr_func=template_encoding)
             parser_config = os.path.join(PROJECT_ROOT, 'conf/BGL.ini')
+        elif dataset == 'open5gs':
+            logs_root = os.path.join(PROJECT_ROOT, 'datasets/open5gs/logs')
+            dataloader = Open5GSLoader(logs_root=logs_root, semantic_repr_func=template_encoding)
+            parser_config = os.path.join(PROJECT_ROOT, 'conf/HDFS.ini')
 
         self.dataloader = dataloader
 

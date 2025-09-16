@@ -12,6 +12,7 @@ This is the basic implementation of our submission in ICSE 2021: **Semi-supervis
     + [Environment:](#environment-)
     + [Preparation](#preparation)
   * [Anomaly detection](#anomaly-detection)
+  * [Open5GS Quickstart](#open5gs-quickstart)
   * [Contact](#contact)
 
 ## Description
@@ -107,8 +108,20 @@ To those who are interested in applying PLELog on their log data, please refer t
 
 - **Step 1:** To run `PLELog` on different log data, create a directory under `datasets` folder **using unique and memorable name**(e.g. HDFS and BGL). `PLELog` will try to find the related files and create logs and results according to this name.
 - **Step 2:** Move target log file (plain text, each raw contains one log message) into the folder of step 1.
-- **Step 3:** Create a new dataloader class implementing `BasicLoader`. 
+- **Step 3:** Create a new dataloader class implementing `BasicLoader`.
 - **Step 4:** Go to `preprocessing/Preprocess.py` and add your new log data into acceptable variables.
+
+## Open5GS Quickstart
+
+The repository now bundles a loader and inference flow for the Open5GS dataset placed under `datasets/open5gs`. A detailed, end-to-end guide that walks through the training and inference commands is available in [datasets/open5gs/README.md](datasets/open5gs/README.md).
+
+At a glance, the high-level workflow is:
+
+- Prepare the environment (`pip install -r requirements.txt`) and download `datasets/glove.6B.300d.txt` if you have not already done so.
+- Run training from the project root: `python approaches/PLELog.py --dataset open5gs --parser IBM --mode train`. The first invocation collects every `.log` file under `datasets/open5gs/logs/`, trains a Drain parser, and fits the PLELog model. All parser state and model checkpoints are stored under `datasets/open5gs/persistences/` and `outputs/models/PLELog/open5gs_IBM/` respectively.
+- After training, score any new log file with `python approaches/PLELog.py --dataset open5gs --parser IBM --inference_file path/to/new.log`. Predictions are written to `outputs/results/PLELog/open5gs_IBM/inference/` as CSV files, one line per log message.
+
+See the dataset-specific README for the full procedure, expected directory structure, and troubleshooting tips.
 
 ## Contact
 
