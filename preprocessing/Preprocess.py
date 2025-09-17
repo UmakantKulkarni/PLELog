@@ -105,6 +105,8 @@ class Preprocessor:
                 id = block
                 label = self.dataloader.block2label[id]
                 inst = Instance(id, self.dataloader.block2eventseq[id], label)
+                inst.is_labeled = getattr(self.dataloader, 'block2labeled', {}).get(id, False)
+                inst.origin = getattr(self.dataloader, 'block2origin', {}).get(id, None)
                 instances.append(inst)
             else:
                 self.logger.error('Found mismatch block: %s. Please check.' % block)
