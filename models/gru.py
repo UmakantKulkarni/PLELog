@@ -59,14 +59,75 @@ class AttGRUModel(nn.Module):
         embed = self.word_embed(words)
         if self.training:
             embed = drop_input_independent(embed, self.dropout)
-        embed = embed.cuda(device)
+        if device.type == 'cuda':
+            embed = embed.cuda(device)
+        else:
+            embed = embed.to(device)
         batch_size = embed.size(0)
         atten_guide = torch.unsqueeze(self.atten_guide, dim=1).expand(-1, batch_size)
         atten_guide = atten_guide.transpose(1, 0)
         hiddens, state = self.rnn(embed)
         sent_probs = self.atten(atten_guide, hiddens, masks)
         batch_size, srclen, dim = hiddens.size()
-        sent_probs = sent_probs.view(batch_size, srclen, -1)
+
+        sent_probs = sent_probs.contiguous()
+        if sent_probs.dim() == 1:
+            total = sent_probs.numel()
+            if total % batch_size == 0:
+                sent_probs = sent_probs.view(batch_size, total // batch_size)
+            elif batch_size == 1:
+                sent_probs = sent_probs.view(1, total)
+            else:
+                raise RuntimeError(
+                    f"Cannot reshape 1D attention weights of length {total} for batch {batch_size}")
+        else:
+            if sent_probs.size(0) != batch_size:
+                transposed = False
+                for axis in range(1, sent_probs.dim()):
+                    if sent_probs.size(axis) == batch_size:
+                        sent_probs = sent_probs.transpose(0, axis).contiguous()
+                        transposed = True
+                        break
+                if not transposed and sent_probs.numel() % batch_size != 0:
+                    raise RuntimeError(
+                        f"Cannot align attention weights of shape {sent_probs.shape} with batch {batch_size}")
+            total = sent_probs.numel()
+            if total % batch_size != 0:
+                raise RuntimeError(
+                    f"Cannot reshape attention weights of shape {sent_probs.shape} for batch {batch_size}")
+            sent_probs = sent_probs.view(batch_size, total // batch_size)
+
+        if sent_probs.size(1) != srclen:
+            if srclen > 0 and sent_probs.size(1) % srclen == 0:
+                sent_probs = sent_probs.view(batch_size, srclen, -1).mean(dim=-1)
+            elif sent_probs.size(1) > srclen:
+                sent_probs = sent_probs[:, :srclen]
+            elif srclen > sent_probs.size(1):
+                pad = srclen - sent_probs.size(1)
+                sent_probs = torch.cat(
+                    [sent_probs, sent_probs.new_zeros(batch_size, pad)], dim=1)
+
+        if masks.dim() > 2:
+            masks = masks.view(batch_size, -1)
+        if masks.size(1) != srclen:
+            if masks.size(1) > srclen:
+                masks = masks[:, :srclen]
+            else:
+                pad = srclen - masks.size(1)
+                if pad > 0:
+                    masks = torch.cat([masks, masks.new_zeros(batch_size, pad)], dim=1)
+
+        sent_probs = sent_probs * masks
+        denom = sent_probs.sum(dim=1, keepdim=True)
+        zero_mask = denom <= 0
+        denom = denom.clamp_min(1e-13)
+        sent_probs = sent_probs / denom
+        if zero_mask.any() and srclen > 0:
+            zero_mask = zero_mask.expand(-1, srclen)
+            fallback = masks / masks.sum(dim=1, keepdim=True).clamp_min(1e-13)
+            sent_probs = torch.where(zero_mask, fallback, sent_probs)
+
+        sent_probs = sent_probs.unsqueeze(-1)
         represents = hiddens * sent_probs
         represents = represents.sum(dim=1)
         outputs = self.proj(represents)

@@ -143,9 +143,13 @@ class BasicDataLoader():
 
     def _load_log_event_seqs(self, reader):
         for line in reader.readlines():
-            tokens = line.strip().split(':')
-            block = tokens[0]
-            seq = tokens[1].split()
+            # Block identifiers can legitimately contain ':' characters (for example when
+            # they encode a relative path plus a line number).  The legacy implementation
+            # naively split on every colon, which truncated the block id and dropped part
+            # of the event sequence.  Only separate the final colon that precedes the
+            # serialized event ids so we faithfully reconstruct the original mapping.
+            block, seq_str = line.strip().rsplit(':', 1)
+            seq = seq_str.split()
             self.block2eventseq[block] = [int(x) for x in seq]
         self.logger.info('Loaded %d blocks' % len(self.block2eventseq))
 

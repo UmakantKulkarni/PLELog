@@ -221,7 +221,7 @@ class PLELog:
     def predict(self, inputs, threshold=None):
         with torch.no_grad():
             tag_logits = self.model(inputs)
-            tag_logits = F.softmax(tag_logits)
+            tag_logits = F.softmax(tag_logits, dim=1)
         if threshold is not None:
             probs = tag_logits.detach().cpu().numpy()
             anomaly_id = self.label2id['Anomalous']
@@ -263,16 +263,29 @@ class PLELog:
                             FN += 1
                 globalBatchNum += 1
             self.logger.info('TP: %d, TN: %d, FN: %d, FP: %d' % (TP, TN, FN, FP))
-            if TP + FP != 0:
-                precision = 100 * TP / (TP + FP)
-                recall = 100 * TP / (TP + FN)
-                f = 2 * precision * recall / (precision + recall)
-                end = time.time()
-                self.logger.info('Precision = %d / %d = %.4f, Recall = %d / %d = %.4f F1 score = %.4f'
-                                 % (TP, (TP + FP), precision, TP, (TP + FN), recall, f))
+            precision = recall = f = 0.0
+            precision_denom = TP + FP
+            recall_denom = TP + FN
+
+            if precision_denom == 0:
+                self.logger.warning('Precision undefined because TP + FP = 0. Returning 0.')
             else:
-                self.logger.info('Precision is 0 and therefore f is 0')
-                precision, recall, f = 0, 0, 0
+                precision = 100 * TP / precision_denom
+
+            if recall_denom == 0:
+                self.logger.warning('Recall undefined because TP + FN = 0. Returning 0.')
+            else:
+                recall = 100 * TP / recall_denom
+
+            if precision + recall > 0:
+                f = 2 * precision * recall / (precision + recall)
+
+            if precision_denom > 0 and recall_denom > 0:
+                self.logger.info('Precision = %d / %d = %.4f, Recall = %d / %d = %.4f F1 score = %.4f'
+                                 % (TP, precision_denom, precision, TP, recall_denom, recall, f))
+            else:
+                self.logger.info('F1 score = %.4f with precision %.4f and recall %.4f under zero-denominator fallback.'
+                                 % (f, precision, recall))
         return precision, recall, f
 
 
@@ -388,6 +401,12 @@ if __name__ == '__main__':
     vocab.load_from_dict(processor.embedding)
 
     plelog = PLELog(vocab, num_layer, lstm_hiddens, processor.label2id)
+
+    if not getattr(processor, 'has_anomalies', True):
+        plelog.logger.warning(
+            'No anomalous instances were found in the %s dataset splits. '
+            'Training will only observe Normal logs, so metrics such as recall and F1 '
+            'will remain zero and the optimization may appear unusually fast.' % dataset)
 
     log = 'layer={}_hidden={}_epoch={}'.format(num_layer, lstm_hiddens, epochs)
     best_model_file = os.path.join(output_model_dir, log + '_best.pt')
