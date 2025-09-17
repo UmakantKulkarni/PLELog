@@ -48,7 +48,7 @@ class Probabilistic_Labeling():
             labeled_inst = instances
         else:
             inputs = [inst.repr for inst in instances]
-            inputs = np.asarray(inputs, dtype=np.float)
+            inputs = np.asarray(inputs, dtype=np.float64)
             ground_truth = [inst.label for inst in instances]
 
             labels = self.model.fit_predict(inputs)
@@ -120,7 +120,7 @@ class Probabilistic_Labeling():
         with open(self.res_file, 'r', encoding='utf-8') as reader:
             for line in reader.readlines():
                 block_id, label, confidence = line.strip().split()
-                block2conf[block_id] = np.float(confidence)
+                block2conf[block_id] = float(confidence)
                 block2label[block_id] = label
         for inst in instances:
             if inst.id in block2label.keys():

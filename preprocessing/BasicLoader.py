@@ -213,7 +213,7 @@ class BasicDataLoader():
         for line in reader.readlines():
             token = line.split()
             template_id = int(token[0])
-            embed = np.asarray(token[1:], dtype=np.float)
+            embed = np.asarray(token[1:], dtype=np.float64)
             self.id2embed[template_id] = embed
         self.logger.info('Load %d templates with embedding size %d' % (len(self.id2embed), self.id2embed[1].shape[0]))
 

@@ -47,7 +47,7 @@ class Simple_template_TF_IDF():
                 else:
                     print(word, end=' ')
                     num_oov += 1
-            return np.asarray(return_list, dtype=np.float).sum(axis=0) / len(words)
+            return np.asarray(return_list, dtype=np.float64).sum(axis=0) / len(words)
         else:
             total_words += 1
             word = words.lower()
@@ -66,7 +66,7 @@ class Simple_template_TF_IDF():
                 for line in tqdm(reader.readlines()):
                     tokens = line.strip().split()
                     word = tokens[0]
-                    embed = np.asarray(tokens[1:], dtype=np.float)
+                    embed = np.asarray(tokens[1:], dtype=np.float64)
                     self._word2vec[word] = embed
 
                     self.vocab_size = len(tokens) - 1
@@ -171,7 +171,7 @@ class Template_TF_IDF_without_clean():
                 for line in tqdm(reader.readlines()):
                     tokens = line.strip().split()
                     word = tokens[0]
-                    embed = np.asarray(tokens[1:], dtype=np.float)
+                    embed = np.asarray(tokens[1:], dtype=np.float64)
                     self._word2vec[word] = embed
                     self.vocab_size = len(tokens) - 1
             pass
