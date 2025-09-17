@@ -69,6 +69,8 @@ class Probabilistic_Labeling():
                     continue
                 new_instance = Instance(inst.id, inst.sequence, inst.label)
                 new_instance.repr = inst.repr
+                new_instance.is_labeled = getattr(inst, 'is_labeled', False)
+                new_instance.origin = getattr(inst, 'origin', None)
                 if label == -1:
                     # -1 cluster, all instances should have confidence 0
                     confidence = 0

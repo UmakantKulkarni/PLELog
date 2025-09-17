@@ -1,5 +1,6 @@
 import sys
 import csv
+import logging
 
 sys.path.extend([".", ".."])
 from CONSTANTS import *
@@ -303,7 +304,8 @@ if __name__ == '__main__':
                            help="Reduce dimentsion for fastICA, to accelerate the HDBSCAN probabilistic label estimation.")
     argparser.add_argument('--threshold', type=float, default=0.5,
                            help="Anomaly threshold for PLELog.")
-    argparser.add_argument('--inference_file', type=str, default=None,
+    argparser.add_argument('--inference_file', '-inference_file', '-i', dest='inference_file', type=str,
+                           default=None,
                            help='Run inference on the specified log file using a trained model.')
     args, extra_args = argparser.parse_known_args()
 
@@ -331,7 +333,14 @@ if __name__ == '__main__':
     parser_config = resolve_parser_config(dataset)
     parser_persistence = os.path.join(PROJECT_ROOT, 'datasets/' + dataset + '/persistences')
 
-    if inference_file:
+    logger = logging.getLogger('PLELog')
+    if extra_args:
+        logger.warning('Ignoring unrecognized arguments: %s', ' '.join(extra_args))
+
+    if mode.lower() == 'inference' or inference_file:
+        if not inference_file:
+            logger.error('Inference mode requires an inference file. Please provide --inference_file.')
+            sys.exit(1)
         run_inference(dataset, parser, inference_file, parser_config, parser_persistence,
                       output_model_dir, threshold)
         sys.exit(0)
@@ -355,21 +364,35 @@ if __name__ == '__main__':
     for index, inst in enumerate(test):
         inst.repr = test_reprs[index]
 
+    vocab = Vocab()
+    vocab.load_from_dict(processor.embedding)
+    plelog = PLELog(vocab, num_layer, lstm_hiddens, processor.label2id)
+
     # Dimension reduction if specified.
     transformer = None
     if reduce_dimension != -1:
         start_time = time.time()
-        print("Start FastICA, target dimension: %d" % reduce_dimension)
+        plelog.logger.info('Start FastICA, target dimension: %d', reduce_dimension)
         transformer = FastICA(n_components=reduce_dimension)
         train_reprs = transformer.fit_transform(train_reprs)
         for idx, inst in enumerate(train):
             inst.repr = train_reprs[idx]
-        print('Finished at %.2f' % (time.time() - start_time))
+        plelog.logger.info('Finished FastICA in %.2fs', (time.time() - start_time))
 
     # Probabilistic labeling.
     # Sample normal instances.
-    train_normal = [x for x, inst in enumerate(train) if inst.label == 'Normal']
-    normal_ids = train_normal[:int(0.5 * len(train_normal))]
+    labeled_normal_indices = [idx for idx, inst in enumerate(train) if getattr(inst, 'is_labeled', False)]
+    if labeled_normal_indices:
+        plelog.logger.info('Identified %d labeled Normal sequences for probabilistic labeling seeds.',
+                           len(labeled_normal_indices))
+        normal_ids = labeled_normal_indices
+    else:
+        train_normal = [x for x, inst in enumerate(train) if inst.label == 'Normal']
+        plelog.logger.warning(
+            'No labeled Normal sequences detected in the training split. Falling back to the first 50%% '
+            'of Normal instances (%d total) as seed data.', len(train_normal))
+        normal_ids = train_normal[:int(0.5 * len(train_normal))]
+    plelog.logger.info('Using %d sequences as PU-learning seeds for probabilistic labeling.', len(normal_ids))
     label_generator = Probabilistic_Labeling(min_samples=min_samples, min_clust_size=min_cluster_size,
                                              res_file=prob_label_res_file, rand_state_file=rand_state)
 
@@ -391,16 +414,10 @@ if __name__ == '__main__':
                 FP += 1
     from utils.common import get_precision_recall
 
-    print(len(normal_ids))
-    print('TP %d TN %d FP %d FN %d' % (TP, TN, FP, FN))
+    plelog.logger.info('Probabilistic labeling confusion matrix -> TP: %d, TN: %d, FP: %d, FN: %d',
+                       TP, TN, FP, FN)
     p, r, f = get_precision_recall(TP, TN, FP, FN)
-    print('%.4f, %.4f, %.4f' % (p, r, f))
-
-    # Load Embeddings
-    vocab = Vocab()
-    vocab.load_from_dict(processor.embedding)
-
-    plelog = PLELog(vocab, num_layer, lstm_hiddens, processor.label2id)
+    plelog.logger.info('Probabilistic labeling precision: %.4f recall: %.4f f1: %.4f', p, r, f)
 
     if not getattr(processor, 'has_anomalies', True):
         plelog.logger.warning(
