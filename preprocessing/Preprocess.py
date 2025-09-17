@@ -20,6 +20,9 @@ class Preprocessor:
         self.tag2id = {'Normal': 0, 'Anomalous': 1}
         self.id2tag = {0: 'Normal', 1: 'Anomalous'}
         self.logger = self._set_logger()
+        self.split_label_counts = {'train': Counter(), 'dev': Counter(), 'test': Counter()}
+        self.total_anomaly_count = 0
+        self.has_anomalies = True
         pass
 
     def _set_logger(self):
@@ -138,15 +141,32 @@ class Preprocessor:
 
     def label_distribution(self, train, dev, test):
         train_label_counter = Counter([inst.label for inst in train])
-        if dev:
-            dev_label_counter = Counter([inst.label for inst in dev])
-            self.logger.info('Dev: %d Normal, %d Anomalous instances.', dev_label_counter['Normal'],
-                             dev_label_counter['Anomalous'])
+        dev_label_counter = Counter([inst.label for inst in dev]) if dev else Counter()
         test_label_counter = Counter([inst.label for inst in test])
-        self.logger.info('Train: %d Normal, %d Anomalous instances.', train_label_counter['Normal'],
-                         train_label_counter['Anomalous'])
-        self.logger.info('Test: %d Normal, %d Anomalous instances.', test_label_counter['Normal'],
-                         test_label_counter['Anomalous'])
+
+        if dev:
+            self.logger.info('Dev: %d Normal, %d Anomalous instances.',
+                             dev_label_counter.get('Normal', 0),
+                             dev_label_counter.get('Anomalous', 0))
+        self.logger.info('Train: %d Normal, %d Anomalous instances.',
+                         train_label_counter.get('Normal', 0),
+                         train_label_counter.get('Anomalous', 0))
+        self.logger.info('Test: %d Normal, %d Anomalous instances.',
+                         test_label_counter.get('Normal', 0),
+                         test_label_counter.get('Anomalous', 0))
+
+        self.split_label_counts = {
+            'train': train_label_counter,
+            'dev': dev_label_counter,
+            'test': test_label_counter,
+        }
+        self.total_anomaly_count = sum(counter.get('Anomalous', 0)
+                                       for counter in self.split_label_counts.values())
+        self.has_anomalies = self.total_anomaly_count > 0
+        if not self.has_anomalies:
+            self.logger.warning(
+                'No anomalous instances detected in train/dev/test splits. '
+                'Training will run on a single class and may converge unusually fast.')
 
     def update_event2idx_mapping(self, pre, post):
         '''
